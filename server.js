@@ -8,11 +8,13 @@ const db = mongoose.connection
 const Fact = require('./models/fact')
 const Art = require('./models/art')
 const Char = require('./models/char')
+const Journal = require('./models/journal')
 
 //seeding
 const factData = require('./utilities/factData')
 const artData = require('./utilities/artData')
 const charData = require('./utilities/charData')
+const journalData = require('./utilities/journalData')
 
 // Environment Variables (getting ready for Heroku)
 const app = express();
@@ -38,6 +40,9 @@ app.use('/art', artRouter)
 const charRouter = require('./controllers/charRouter.js')
 app.use('/char', charRouter)
 
+const journalRouter = require('./controllers/journalRouter.js')
+app.use('/journal', journalRouter)
+
 app.get('/seed', async (req, res) => {
   await Fact.deleteMany({});
   await Fact.insertMany(factData);
@@ -45,6 +50,8 @@ app.get('/seed', async (req, res) => {
   await Art.insertMany(artData);
   await Char.deleteMany({});
   await Char.insertMany(charData);
+  await Journal.deleteMany({});
+  await Journal.insertMany(journalData);
   res.send('done!');
 });
 
