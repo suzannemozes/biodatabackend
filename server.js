@@ -33,11 +33,17 @@ app.use('/fact', factRouter)
 const artRouter = require('./controllers/artRouter.js')
 app.use('/art', artRouter)
 
+const charRouter = require('./controllers/charRouter.js')
+const Char = require('./models/char')
+app.use('/char', charRouter)
+
 app.get('/seed', async (req, res) => {
   await Fact.deleteMany({});
   await Fact.insertMany(factData);
   await Art.deleteMany({});
   await Art.insertMany(artData);
+  await Char.deleteMany({});
+  await Char.insertMany(charData);
   res.send('done!');
 });
 

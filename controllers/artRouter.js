@@ -1,7 +1,6 @@
 const express = require('express');
 const Art = require('../models/art');
 const router = express.Router();
-const Fact = require('../models/art');
 
 // Remember INDUCES
 
