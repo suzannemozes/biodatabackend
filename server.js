@@ -7,10 +7,12 @@ const db = mongoose.connection
 //models
 const Fact = require('./models/fact')
 const Art = require('./models/art')
+const Char = require('./models/char')
 
 //seeding
 const factData = require('./utilities/factData')
 const artData = require('./utilities/artData')
+const charData = require('./utilities/charData')
 
 // Environment Variables (getting ready for Heroku)
 const app = express();
@@ -23,7 +25,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true },
 )
 
 // Error / Disconnection
-db.on('error', err => console.log(err.message + ' is Mongod not running?'))
+db.on('error', err => console.log(err.message + ' is Mongodb not running?'))
 db.on('disconnected', () => console.log('mongo disconnected'))
 
 //Routes
@@ -34,7 +36,6 @@ const artRouter = require('./controllers/artRouter.js')
 app.use('/art', artRouter)
 
 const charRouter = require('./controllers/charRouter.js')
-const Char = require('./models/char')
 app.use('/char', charRouter)
 
 app.get('/seed', async (req, res) => {

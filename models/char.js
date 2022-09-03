@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const char Schema = new mongoose.Schema({
+const charSchema = new mongoose.Schema({
     name: String,
     dobyear: Number,
     dobmonth: Number,
