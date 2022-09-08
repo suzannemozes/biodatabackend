@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 const factSchema = new mongoose.Schema({
   title: String,
-  people: [],
-  place: String,
+  description: String,
   year: Number,
   month: Number,
   day: Number,
