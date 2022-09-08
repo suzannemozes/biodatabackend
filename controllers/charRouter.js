@@ -1,48 +1,45 @@
 const express = require("express");
-const Char = require("../models/char");
 const router = express.Router();
+const Character = require("../models/char");
 
-// Remember INDUCES
-
-// Index Route
-router.get("/", (req, res) => {
-  Char.find({}, (err, foundChar) => {
-    res.json(foundChar);
+// Character Index Route
+router.get("/characters", (req, res) => {
+  Character.find({}, (err, foundCharacter) => {
+    res.json(foundCharacter);
   });
 });
 
-// New - Will be handled by React application
-// Delete
-router.delete("/:id", (req, res) => {
-  Char.findByIdAndRemove(req.params.id, (err, deletedChar) => {
-    res.json(deletedChar);
+// Character Create Route
+router.post("/characters", (req, res) => {
+  Character.create(req.body, (err, createdCharacter) => {
+    res.json(createdCharacter);
   });
 });
 
-// Update
-router.put("/:id", (req, res) => {
-  Char.findByIdAndUpdate(
+//Character Show Rote
+router.get("/characters/:id", (req, res) => {
+  Character.findById(req.params.id, (err, foundCharacter) => {
+    res.json(foundCharacter);
+  });
+});
+
+// Character Delete Route
+router.delete("/characters/:id", (req, res) => {
+  Character.findByIdAndRemove(req.params.id, (err, deletedCharacter) => {
+    res.json(deletedCharacter);
+  });
+});
+
+// Character Update Route
+router.put("/characters/:id", (req, res) => {
+  Character.findByIdAndUpdate(
     req.params.id,
     req.body,
     { new: true },
-    (err, updatedChar) => {
-      res.json(updatedChar);
+    (err, updatedCharacter) => {
+      res.json(updatedCharacter);
     }
   );
 });
 
-// Create
-router.post("/", (req, res) => {
-  Char.create(req.body, (err, createdChar) => {
-    res.json(createdChar); //.json() will send proper headers in response so client knows it's json coming back
-  });
-});
-// Edit - Will be handled by React application
-// Show
-router.get("/:id", (req, res) => {
-  Char.findById(req.params.id, (err, foundChar) => {
-    res.json(foundChar);
-  });
-});
-
-module.exports = router;
+module.exports = router
